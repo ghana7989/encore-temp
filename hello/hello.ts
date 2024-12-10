@@ -7,7 +7,15 @@ interface Response {
 type getParams = { name?: string; };
 export const get = api(
   { method: "GET", path: "/hello", expose: true },
-  async ({ name = "" }: getParams): Promise<Response> => {
-    return { message: `Hello, ${name || "world"}` };
+  async ({ name }: getParams): Promise<Response> => {
+    if (!name) {
+      return {
+        message: "Hello, world"
+      }
+    } else {
+      return {
+        message: `Hello, ${name}`
+      }
+    }
   }
 )
